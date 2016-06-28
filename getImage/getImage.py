@@ -37,9 +37,19 @@ if __name__ == '__main__':
     API_KEY = MY_API_KEY
 
     query = sys.argv[1]
-    #API KEY, クエリ, 取得した画像数を渡す
-    url_list = getImageUrlFromFlickr(API_KEY, query, 10)
-
-    #取得した画像URLを表示
-    for url in url_list:
-        print url
+    if query[-4:] == ".txt":
+      fn = open(query)
+      for line in fn:
+        print("\n" + str(line[:-1]))
+        #API KEY, クエリ, 取得した画像数を渡す
+        url_list = getImageUrlFromFlickr(API_KEY, line, 3)
+        #取得した画像URLを表示
+        for url in url_list:
+          print(url)
+      fn.close
+    else:
+      #API KEY, クエリ, 取得した画像数を渡す
+      url_list = getImageUrlFromFlickr(API_KEY, query, 15)
+      #取得した画像URLを表示
+      for url in url_list:
+        print(url)
